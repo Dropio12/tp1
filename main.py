@@ -1,14 +1,13 @@
 import py
 import pytest
 
-run main()
 
 def config_pompe():
     print('Configuration de la pompe à essence...')
     prix_ordinaire= int(input("Quel est le prix de l'essence ordinaire? "))
     prix_diesel = int(input("Quel est le prix du diesel? "))
     prix_super = prix_ordinaire * 1.10
-    code_promotionnel = int(input("Le code secret du jour est: "))
+    code_promotionnel = input("Le code secret du jour est: ")
     return prix_ordinaire, prix_diesel, prix_super, code_promotionnel;
 
 def automobile():
@@ -109,7 +108,7 @@ def Remplissage_Super(Reservoir_actuel, Reservoir_Max, prix_super, code_promotio
         else:
             return False
 
-def main():
+def __main__():
     config_pompe()
     automobile()
     pompe(prix_ordinaire, prix_diesel, prix_super)
@@ -118,3 +117,6 @@ def main():
         print("Le prix total est de "+str(Prix_Total*0.95)+" $")
     else:
         print("Le prix total est de "+str(Prix_Total)+" $")
+
+if __name__ == '__main__':
+    __main__()
