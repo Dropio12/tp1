@@ -1,23 +1,20 @@
 import py
+import pytest
 
-def main():
-    config_pompe()
-    automobile()
-    pompe(prix_ordinaire, prix_diesel, prix_super)
-    code_promo(code_promotionnel)
+run main()
 
 def config_pompe():
     print('Configuration de la pompe à essence...')
-    prix_ordinaire: int = input("Quel est le prix de l'essence ordinaire? ")
-    prix_diesel = input("Quel est le prix du diesel? ")
+    prix_ordinaire= int(input("Quel est le prix de l'essence ordinaire? "))
+    prix_diesel = int(input("Quel est le prix du diesel? "))
     prix_super = prix_ordinaire * 1.10
-    code_promotionnel = input("Le code secret du jour est: ")
+    code_promotionnel = int(input("Le code secret du jour est: "))
     return prix_ordinaire, prix_diesel, prix_super, code_promotionnel;
 
 def automobile():
     print("Une autombile arrive...")
-    Reservoir_Max= input("Le nombre de litres total de son réservoir est ")
-    Reservoir_actuel= input("Le nombre de litres actuel du réservoir est ")
+    Reservoir_Max= float(input("Le nombre de litres total de son réservoir est "))
+    Reservoir_actuel= float(input("Le nombre de litres actuel du réservoir est "))
     return Reservoir_actuel and Reservoir_Max;
 
 def pompe(prix_ordinaire, prix_diesel, prix_super):
@@ -43,7 +40,7 @@ def Remplissage_Ordinaire(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_
         print("Le prix total est de "+str(Prix_Total)+" $")
         return Prix_Total;
     elif choix_remplissage == "M" or choix_remplissage == "m":
-        Montant = int(input("Quel montant voulez - vous mettre dans le réservoir ?"))
+        Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ?"))
         if Montant >0 and Montant <= (Reservoir_Max - Reservoir_actuel) * prix_ordinaire:
                 Nb_Litres = Montant / prix_ordinaire
                 print("Le réservoir est rempli à "+str(Nb_Litres+Reservoir_actuel)+" litres")
@@ -64,7 +61,7 @@ def Remplissage_Diesel(Reservoir_actuel, Reservoir_Max, prix_diesel, code_promot
         print("Le prix total est de "+str(Prix_Total)+" $")
         return Prix_Total;
     elif choix_remplissage == "M" or choix_remplissage == "m":
-        Montant = int(input("Quel montant voulez - vous mettre dans le réservoir ?"))
+        Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ?"))
         if Montant >0 and Montant <= (Reservoir_Max - Reservoir_actuel) * prix_diesel:
                 Nb_Litres = Montant / prix_diesel
                 print("Le réservoir est rempli à "+str(Nb_Litres+Reservoir_actuel)+" litres")
@@ -85,7 +82,7 @@ def Remplissage_Super(Reservoir_actuel, Reservoir_Max, prix_super, code_promotio
         print("Le prix total est de "+str(Prix_Total)+" $")
         return Prix_Total;
     elif choix_remplissage == "M" or choix_remplissage == "m":
-        Montant = int(input("Quel montant voulez - vous mettre dans le réservoir ?"))
+        Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ?"))
         if Montant >0 and Montant <= (Reservoir_Max - Reservoir_actuel) * prix_super:
                 Nb_Litres = Montant / prix_super
                 print("Le réservoir est rempli à "+str(Nb_Litres+Reservoir_actuel)+" litres")
@@ -109,3 +106,15 @@ def Remplissage_Super(Reservoir_actuel, Reservoir_Max, prix_super, code_promotio
             else:
                 print("Code promotionnel invalide")
                 return False
+        else:
+            return False
+
+def main():
+    config_pompe()
+    automobile()
+    pompe(prix_ordinaire, prix_diesel, prix_super)
+    code_promo(code_promotionnel)
+    if code_promo(code_promotionnel) == True:
+        print("Le prix total est de "+str(Prix_Total*0.95)+" $")
+    else:
+        print("Le prix total est de "+str(Prix_Total)+" $")
