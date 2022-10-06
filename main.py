@@ -63,7 +63,7 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
         Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel)
     print("Le prix total est de "+str(Prix_Total)+" $")
     if validation_code_promo(code_promotionnel)==True:
-        print("Le prix total est de "+str(Prix_Total*0.9)+" $")
+        print("Le prix total est de "+str(Prix_Total*0.7)+" $")
         print("Merci et à bientôt")
     else:
         print("Le prix total est de "+str(Prix_Total)+" $")
@@ -71,21 +71,25 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
         exit()
 
 def validation_code_promo(code_promotionnel):
-    validation = input("Voulez - vous utiliser un code promotionnel (O/N)?")
-    if validation == "O" or validation == "o":
-        validation_code = input("Entrez le code promotionnel: ")
+    validation = input("Si vous connaissez le code promotionnel RABAIS+, entrez - le maintenant pour obtenir 30% de rabais : ")
         if validation_code == code_promotionnel:
-            print("Code promotionnel valide")
+            print("Code valide.")
             return True;
         else:
-            print("Code promotionnel invalide")
-            code_promo(code_promotionnel)
-    elif validation == "N" or validation == "n":
-        print("Aucun code promotionnel n'a été utilisé")
-        return False;
-    else:
-        print("Erreur de saisie. Veuillez choisir entre O et N")
-        validation_code_promo(code_promotionnel)
+            print("Code non valide.")
+            while R:
+                Essai_2 = input("Voulez - vous réessayer avec un autre code ? (O/N) ")
+                if Essai_2 == "O" or Essai_2 == "o":
+                    validation= input("Veuillez entrer le code promotionnel : ")
+                    if validation == code_promotionnel:
+                        print("Code valide.")
+                        return True;
+                        break
+                        else:
+                            print("Code non valide.")
+                elif Essai_2 == "N" or Essai_2 == "n":
+                    return False;
+                    break
 
 def config_pompe():
     print("Configuration de la pompe à essence ...")
