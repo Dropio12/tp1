@@ -3,6 +3,9 @@ import pytest
 def Reservoir_status():
     Reservoir_Max = float(input("Le nombre de litres total de son réservoir est "))
     Reservoir_actuel = float(input("et il en contient actuellement "))
+    Reservoir_vérification(Reservoir_actuel, Reservoir_Max)
+    while Reservoir_vérification(Reservoir_actuel, Reservoir_Max) == False:
+        Reservoir_status()
     return Reservoir_actuel, Reservoir_Max
 
 def Reservoir_vérification(Reservoir_actuel, Reservoir_Max):
@@ -13,8 +16,7 @@ def Reservoir_vérification(Reservoir_actuel, Reservoir_Max):
         exit()
     else:
         print("Erreur de saisie. Le réservoir ne peut pas contenir plus de "+str(Reservoir_Max)+" litres")
-        Reservoir_status()
-        Reservoir_vérification(Reservoir_actuel, Reservoir_Max)
+        return False
 
 def pompe(prix_ordinaire, prix_diesel, prix_super):
     print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
@@ -41,12 +43,13 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
     if choix_remplissage == "P" or choix_remplissage == "p":
         print("Remplissage !")
         while (Reservoir_actuel < Reservoir_Max) or Enter == "A":
-            Reservoir_actuel += 1
-            if Reservoir_Max-Reservoir_actuel < 1:
+            if Reservoir_Max - Reservoir_actuel > 1:
                 Prix_Total += prix_ordinaire
-            print("Le réservoir contient maintenant "+str(Reservoir_actuel)+" litres")
+            else:
+                Prix_Total += prix_ordinaire * (Reservoir_Max - Reservoir_actuel)
+            Reservoir_actuel += 1
+            print("Le réservoir contient maintenant "+str(Reservoir_actuel)+" litres, ce qui vous revient à "+ str(Prix_Total)+" $")
             Enter= input("Appuyez sur Entrée pour ajouter un litre")
-            Prix_Total = (Reservoir_Max - Reservoir_actuel) * prix_ordinaire;
     elif choix_remplissage == "M" or choix_remplissage == "m":
         Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ? "))
         if Montant >0 and Montant <= (Reservoir_Max - Reservoir_actuel) * prix_ordinaire:
@@ -107,7 +110,6 @@ def config_pompe():
 prix_ordinaire, prix_diesel, prix_super, code_promotionnel = config_pompe()
 print("Une autombile arrive.")
 Reservoir_actuel, Reservoir_Max= Reservoir_status()
-Reservoir_vérification(Reservoir_actuel, Reservoir_Max)
 pompe(prix_ordinaire, prix_diesel, prix_super)
 
 
