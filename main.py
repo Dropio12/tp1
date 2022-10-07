@@ -5,6 +5,7 @@ def Reservoir_status():
     Reservoir_actuel = float(input("et il en contient actuellement "))
     Reservoir_vérification(Reservoir_actuel, Reservoir_Max)
     while Reservoir_vérification(Reservoir_actuel, Reservoir_Max) == False:
+        print("Erreur de saisie. Le réservoir ne peut pas contenir plus de "+str(Reservoir_Max)+" litres")
         Reservoir_status()
     return Reservoir_actuel, Reservoir_Max
 
@@ -15,7 +16,6 @@ def Reservoir_vérification(Reservoir_actuel, Reservoir_Max):
         print("Le réservoir est déjà plein. Bonne journée!")
         exit()
     else:
-        print("Erreur de saisie. Le réservoir ne peut pas contenir plus de "+str(Reservoir_Max)+" litres")
         return False
 
 def pompe(prix_ordinaire, prix_diesel, prix_super):
