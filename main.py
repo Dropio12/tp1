@@ -40,11 +40,13 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
     Prix_Total = 0
     if choix_remplissage == "P" or choix_remplissage == "p":
         print("Remplissage !")
-        while (Reservoir_actuel < Reservoir_Max and Enter == null) or Enter == "A":
+        while (Reservoir_actuel < Reservoir_Max) or Enter == "A":
             Reservoir_actuel += 1
+            if Reservoir_Max-Reservoir_actuel < 1:
+                Prix_Total += prix_ordinaire
             print("Le réservoir contient maintenant "+str(Reservoir_actuel)+" litres")
             Enter= input("Appuyez sur Entrée pour ajouter un litre")
-        Prix_Total = (Reservoir_Max - Reservoir_actuel) * prix_ordinaire;
+            Prix_Total = (Reservoir_Max - Reservoir_actuel) * prix_ordinaire;
     elif choix_remplissage == "M" or choix_remplissage == "m":
         Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ? "))
         if Montant >0 and Montant <= (Reservoir_Max - Reservoir_actuel) * prix_ordinaire:
@@ -72,24 +74,26 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
 
 def validation_code_promo(code_promotionnel):
     validation = input("Si vous connaissez le code promotionnel RABAIS+, entrez - le maintenant pour obtenir 30% de rabais : ")
-        if validation_code == code_promotionnel:
-            print("Code valide.")
-            return True;
-        else:
-            print("Code non valide.")
-            while R:
-                Essai_2 = input("Voulez - vous réessayer avec un autre code ? (O/N) ")
-                if Essai_2 == "O" or Essai_2 == "o":
-                    validation= input("Veuillez entrer le code promotionnel : ")
-                    if validation == code_promotionnel:
-                        print("Code valide.")
-                        return True;
-                        break
-                        else:
-                            print("Code non valide.")
-                elif Essai_2 == "N" or Essai_2 == "n":
-                    return False;
+    if validation_code == code_promotionnel:
+        print("Code valide.")
+        return True;
+    else:
+        print("Code non valide.")
+        while Essai_2 == "O" or Essai_2 == "o":
+            Essai_2 = input("Voulez - vous réessayer avec un autre code ? (O/N) ")
+            if Essai_2 == "O" or Essai_2 == "o":
+                validation= input("Veuillez entrer le code promotionnel : ")
+                if validation_code == code_promotionnel:
+                    print("Code valide.")
+                    return True;
                     break
+                else:
+                    print("Code non valide.")
+            elif Essai_2 == "N" or Essai_2 == "n":
+                return False;
+                break
+            else:
+                print("Erreur de saisie. Veuillez entrer O ou N")
 
 def config_pompe():
     print("Configuration de la pompe à essence ...")
