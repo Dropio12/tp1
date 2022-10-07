@@ -42,14 +42,15 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
     Prix_Total = 0
     if choix_remplissage == "P" or choix_remplissage == "p":
         print("Remplissage !")
-        while (Reservoir_actuel < Reservoir_Max) or Enter == "A":
+        while (Reservoir_actuel < Reservoir_Max) or Choix != "A":
             if Reservoir_Max - Reservoir_actuel > 1:
                 Prix_Total += prix_ordinaire
+                Reservoir_actuel += 1
+                print("Le réservoir contient maintenant " + str(Reservoir_actuel) + " litres, ce qui vous revient à " + str(Prix_Total) + " $")
+                Choix= input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
             else:
                 Prix_Total += prix_ordinaire * (Reservoir_Max - Reservoir_actuel)
-            Reservoir_actuel += 1
-            print("Le réservoir contient maintenant "+str(Reservoir_actuel)+" litres, ce qui vous revient à "+ str(Prix_Total)+" $")
-            Enter= input("Appuyez sur Entrée pour ajouter un litre")
+                Reservoir_actuel = Reservoir_Max
     elif choix_remplissage == "M" or choix_remplissage == "m":
         Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ? "))
         if Montant >0 and Montant <= (Reservoir_Max - Reservoir_actuel) * prix_ordinaire:

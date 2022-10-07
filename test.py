@@ -17,3 +17,5 @@ def Reservoir_vérification(Reservoir_actuel, Reservoir_Max):
         return False
 
 Reservoir_status()
+
+|when you enter A, it stops the while loop, but if you press enter, it continues
