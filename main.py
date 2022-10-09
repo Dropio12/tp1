@@ -44,15 +44,19 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
         print("Remplissage !")
         Prix_Total+= prix_ordinaire
         Reservoir_actuel += 1
-        while (Reservoir_actuel < Reservoir_Max) or Choix != "A":
+        Choix_arret_modif = 1
+        while (Reservoir_actuel < Reservoir_Max) and Choix_arret_modif == 1:
             if Reservoir_Max - Reservoir_actuel > 1:
                 Prix_Total += prix_ordinaire
                 Reservoir_actuel += 1
                 print("Le réservoir contient maintenant " + str(Reservoir_actuel) + " litres, ce qui vous revient à " + str(Prix_Total) + " $")
-                Choix= input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
+                Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
+                if Choix_arret == "A" or Choix_arret == "a":
+                    Choix_arret_modif = 0
             else:
                 Prix_Total += prix_ordinaire * (Reservoir_Max - Reservoir_actuel)
                 Reservoir_actuel = Reservoir_Max
+
     elif choix_remplissage == "M" or choix_remplissage == "m":
         Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ? "))
         print("Remplissage !")
@@ -60,12 +64,15 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
         Reservoir_actuel1= Reservoir_actuel
         if Reservoir_final > Reservoir_Max:
             Reservoir_final = Reservoir_Max
-        while Reservoir_actuel < Reservoir_final or Choix == "A":
+        Choix_arret_modif = 1
+        while Reservoir_actuel < Reservoir_final and Choix_arret_modif == 1:
             if Reservoir_final - Reservoir_actuel > 1 :
                 Prix_Total += prix_ordinaire
                 Reservoir_actuel += 1
                 print("Le réservoir contient maintenant " + str(Reservoir_actuel) + " litres, ce qui vous revient à " + str(Prix_Total) + " $")
-                Choix = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
+                Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
+                if Choix_arret == "A" or Choix_arret == "a":
+                    Choix_arret_modif = 0
             else:
                 if  (Reservoir_Max-Reservoir_actuel)*prix_ordinaire <= Montant:
                     Prix_Total = (Reservoir_Max-Reservoir_actuel)*prix_ordinaire +Prix_Total
