@@ -42,17 +42,17 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
     Prix_Total = 0
     if choix_remplissage == "P" or choix_remplissage == "p":
         print("Remplissage !")
-        Prix_Total+= prix_ordinaire
-        Reservoir_actuel += 1
+
         Choix_arret_modif = 1
         while (Reservoir_actuel < Reservoir_Max) and Choix_arret_modif == 1:
             if Reservoir_Max - Reservoir_actuel > 1:
-                Prix_Total += prix_ordinaire
-                Reservoir_actuel += 1
-                print("Le réservoir contient maintenant " + str(Reservoir_actuel) + " litres, ce qui vous revient à " + str(Prix_Total) + " $")
                 Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
                 if Choix_arret == "A" or Choix_arret == "a":
                     Choix_arret_modif = 0
+                Prix_Total += prix_ordinaire
+                Reservoir_actuel += 1
+                print("État du réservoir d'essence : " + str(Reservoir_actuel) + " litres sur "+ str(Reservoir_Max))
+                print("Coût (jusqu'à maintenant) : " + str(Prix_Total) + "$")
             else:
                 Prix_Total += prix_ordinaire * (Reservoir_Max - Reservoir_actuel)
                 Reservoir_actuel = Reservoir_Max
@@ -67,12 +67,13 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
         Choix_arret_modif = 1
         while Reservoir_actuel < Reservoir_final and Choix_arret_modif == 1:
             if Reservoir_final - Reservoir_actuel > 1 :
-                Prix_Total += prix_ordinaire
-                Reservoir_actuel += 1
-                print("Le réservoir contient maintenant " + str(Reservoir_actuel) + " litres, ce qui vous revient à " + str(Prix_Total) + " $")
                 Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
                 if Choix_arret == "A" or Choix_arret == "a":
                     Choix_arret_modif = 0
+                Prix_Total += prix_ordinaire
+                Reservoir_actuel += 1
+                print("État du réservoir d'essence : " + str(Reservoir_actuel) + " litres sur " + str(Reservoir_Max))
+                print("Coût (jusqu'à maintenant) : " + str(Prix_Total) + "$")
             else:
                 if  (Reservoir_Max-Reservoir_actuel)*prix_ordinaire <= Montant:
                     Prix_Total = (Reservoir_Max-Reservoir_actuel)*prix_ordinaire +Prix_Total
@@ -82,16 +83,19 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
     else:
         print("Erreur de saisie. Veuillez choisir entre P et M")
         Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel)
-    print("Le prix total est de "+str(Prix_Total)+" $ avec "+str(Reservoir_actuel)+" litres dans le réservoir.")
+    print("Terminé!")
     if validation_code_promo(code_promotionnel) == True :
-        print("Le prix total est de "+str(Prix_Total*0.7)+" $")
-        print("Merci et à bientôt")
+        print("---------------------------------------------------------")
+        print("Le montant final est : "+str(Prix_Total*0.7)+"$")
+        print("Faites bonne route !")
     else:
-        print("Le prix total est de "+str(Prix_Total)+" $")
-        print("Merci et à bientôt")
+        print("---------------------------------------------------------")
+        print("Le prix montant final est :  "+str(Prix_Total)+"$")
+        print("Faites bonne route !")
         exit()
 
 def validation_code_promo(code_promotionnel):
+    print("---------------------------------------------------------")
     validation = input("Si vous connaissez le code promotionnel RABAIS+, entrez - le maintenant pour obtenir 30% de rabais : ")
     if validation == code_promotionnel:
         print("Code valide.")
