@@ -42,6 +42,8 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
     Prix_Total = 0
     if choix_remplissage == "P" or choix_remplissage == "p":
         print("Remplissage !")
+        Prix_Total+= prix_ordinaire
+        Reservoir_actuel += 1
         while (Reservoir_actuel < Reservoir_Max) or Choix != "A":
             if Reservoir_Max - Reservoir_actuel > 1:
                 Prix_Total += prix_ordinaire
@@ -53,22 +55,25 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
                 Reservoir_actuel = Reservoir_Max
     elif choix_remplissage == "M" or choix_remplissage == "m":
         Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ? "))
-        if Montant >0 and Montant <= (Reservoir_Max - Reservoir_actuel) * prix_ordinaire:
-                Nb_Litres = Montant / prix_ordinaire
-                print("Le réservoir est rempli à "+str(Nb_Litres+Reservoir_actuel)+" litres")
-                Prix_Total = Montant
-        elif Montant > (Reservoir_Max - Reservoir_actuel) * prix_ordinaire:
-                print("Le réservoir est rempli à "+str(Reservoir_Max)+" litres")
-                print("Le montant de "+str(Montant-Prix_Total)+" $ n'a pas été utilisé")
-                Prix_Total = (Reservoir_Max - Reservoir_actuel) * prix_ordinaire
-        else:
-            print("Erreur de saisie. Impossible de mettre un montant négatif dans le réservoir")
-            Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel)
+        print("Remplissage !")
+        Reservoir_final= Montant / prix_ordinaire+ Reservoir_actuel
+        while Reservoir_actuel < Reservoir_final or Choix == "A":
+            if Reservoir_final - Reservoir_actuel > 1 :
+                Prix_Total += prix_ordinaire
+                Reservoir_actuel += 1
+                print("Le réservoir contient maintenant " + str(Reservoir_actuel) + " litres, ce qui vous revient à " + str(Prix_Total) + " $")
+                Choix = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
+            else:
+                if  (Reservoir_Max-Reservoir_actuel)*prix_ordinaire <= Montant:è;é8.
+                    Prix_Total = (Reservoir_Max-Reservoir_actuel)*prix_ordinaire +Prix_Totalùzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa    u7v
+                else:
+                    Prix_Total = Montant
+                Reservoir_actuel = Prix_Total/prix_ordinaire+Reservoir_actuel
     else:
         print("Erreur de saisie. Veuillez choisir entre P et M")
         Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel)
-    print("Le prix total est de "+str(Prix_Total)+" $")
-    if validation_code_promo(code_promotionnel)==True:
+    print("Le prix total est de "+str(Prix_Total)+" $ avec "+str(Reservoir_actuel)+" litres dans le réservoir.")
+    if validation_code_promo(code_promotionnel) == True :
         print("Le prix total est de "+str(Prix_Total*0.7)+" $")
         print("Merci et à bientôt")
     else:
@@ -78,26 +83,12 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
 
 def validation_code_promo(code_promotionnel):
     validation = input("Si vous connaissez le code promotionnel RABAIS+, entrez - le maintenant pour obtenir 30% de rabais : ")
-    if validation_code == code_promotionnel:
+    if validation == code_promotionnel:
         print("Code valide.")
         return True;
     else:
         print("Code non valide.")
-        while Essai_2 == "O" or Essai_2 == "o":
-            Essai_2 = input("Voulez - vous réessayer avec un autre code ? (O/N) ")
-            if Essai_2 == "O" or Essai_2 == "o":
-                validation= input("Veuillez entrer le code promotionnel : ")
-                if validation_code == code_promotionnel:
-                    print("Code valide.")
-                    return True;
-                    break
-                else:
-                    print("Code non valide.")
-            elif Essai_2 == "N" or Essai_2 == "n":
-                return False;
-                break
-            else:
-                print("Erreur de saisie. Veuillez entrer O ou N")
+        return False;
 
 def config_pompe():
     print("Configuration de la pompe à essence ...")
