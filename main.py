@@ -42,44 +42,45 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
     Prix_Total = 0
     if choix_remplissage == "P" or choix_remplissage == "p":
         print("Remplissage !")
-
         Choix_arret_modif = 1
         while (Reservoir_actuel < Reservoir_Max) and Choix_arret_modif == 1:
-            if Reservoir_Max - Reservoir_actuel > 1:
-                Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
-                if Choix_arret == "A" or Choix_arret == "a":
-                    Choix_arret_modif = 0
+            Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
+            if Reservoir_Max - Reservoir_actuel > 1 and Choix_arret != "A" or Choix_arret != "a":
                 Prix_Total += prix_ordinaire
                 Reservoir_actuel += 1
                 print("État du réservoir d'essence : " + str(Reservoir_actuel) + " litres sur "+ str(Reservoir_Max))
                 print("Coût (jusqu'à maintenant) : " + str(Prix_Total) + "$")
+            elif Choix_arret == "A" or Choix_arret == "a":
+                    Choix_arret_modif = 0
             else:
                 Prix_Total += prix_ordinaire * (Reservoir_Max - Reservoir_actuel)
                 Reservoir_actuel = Reservoir_Max
+                print("État du réservoir d'essence : " + str(Reservoir_actuel) + " litres sur " + str(Reservoir_Max))
+                print("Coût (jusqu'à maintenant) : " + str(Prix_Total) + "$")
 
     elif choix_remplissage == "M" or choix_remplissage == "m":
         Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ? "))
         print("Remplissage !")
-        Reservoir_final= Montant / prix_ordinaire+ Reservoir_actuel
-        Reservoir_actuel1= Reservoir_actuel
+        Reservoir_final= float(Montant/ prix_ordinaire+ Reservoir_actuel)
         if Reservoir_final > Reservoir_Max:
             Reservoir_final = Reservoir_Max
         Choix_arret_modif = 1
         while Reservoir_actuel < Reservoir_final and Choix_arret_modif == 1:
-            if Reservoir_final - Reservoir_actuel > 1 :
-                Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
-                if Choix_arret == "A" or Choix_arret == "a":
-                    Choix_arret_modif = 0
+            Choix_arret = input("Appuyez sur Entrée pour ajouter un litre ou sur A pour arrêter le remplissage.")
+            if Reservoir_final - Reservoir_actuel > 1 and Choix_arret != "A" or Choix_arret != "a":
                 Prix_Total += prix_ordinaire
                 Reservoir_actuel += 1
                 print("État du réservoir d'essence : " + str(Reservoir_actuel) + " litres sur " + str(Reservoir_Max))
                 print("Coût (jusqu'à maintenant) : " + str(Prix_Total) + "$")
+            elif Choix_arret == "A" or Choix_arret == "a":
+                Choix_arret_modif = 0
             else:
                 if  (Reservoir_Max-Reservoir_actuel)*prix_ordinaire <= Montant:
                     Prix_Total = (Reservoir_Max-Reservoir_actuel)*prix_ordinaire +Prix_Total
                 else:
                     Prix_Total = Montant
-                Reservoir_actuel = Reservoir_actuel1 + Prix_Total / prix_ordinaire
+                    print("État du réservoir d'essence : " + str(Reservoir_final) + " litres sur " + str(Reservoir_Max))
+                    print("Coût (jusqu'à maintenant) : " + str(Prix_Total) + "$")
     else:
         print("Erreur de saisie. Veuillez choisir entre P et M")
         Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel)
@@ -118,6 +119,7 @@ print("Une autombile arrive.")
 Reservoir_actuel, Reservoir_Max= Reservoir_status()
 pompe(prix_ordinaire, prix_diesel, prix_super)
 
+#explique moi pourquoi ça ne marche pas
 
 
 
