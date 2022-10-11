@@ -1,6 +1,6 @@
 import py
 import pytest
-def Reservoir_status():
+def Reservoir_status(): # Affichage du réservoir
     Reservoir_Max = float(input("Le nombre de litres total de son réservoir est "))
     Reservoir_actuel = float(input("et il en contient actuellement "))
     Reservoir_vérification(Reservoir_actuel, Reservoir_Max)
@@ -9,7 +9,7 @@ def Reservoir_status():
         Reservoir_status()
     return Reservoir_actuel, Reservoir_Max
 
-def Reservoir_vérification(Reservoir_actuel, Reservoir_Max):
+def Reservoir_vérification(Reservoir_actuel, Reservoir_Max): # Vérification du réservoir (ne peut pas contenir plus que le maximum de litres)
     if Reservoir_actuel < Reservoir_Max:
         return True
     elif Reservoir_actuel == Reservoir_Max:
@@ -18,7 +18,7 @@ def Reservoir_vérification(Reservoir_actuel, Reservoir_Max):
     else:
         return False
 
-def pompe(prix_ordinaire, prix_diesel, prix_super):
+def pompe(prix_ordinaire, prix_diesel, prix_super): # Choix du type de carburant
     print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
     print("- - - Affichage sur la pompe                                                                  - - -")
     print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
@@ -37,10 +37,10 @@ def pompe(prix_ordinaire, prix_diesel, prix_super):
         print("Erreur de saisie")
         pompe(prix_ordinaire, prix_diesel, prix_super)
 
-def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel):
+def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel): # Remplissage du réservoir et calcul du prix total à payer
     choix_remplissage= input("Souhaitez - vous faire le plein (P) ou choisir un montant fixe (M) ? ")
     Prix_Total = 0
-    if choix_remplissage == "P" or choix_remplissage == "p":
+    if choix_remplissage == "P" or choix_remplissage == "p": # Remplissage du réservoir jusqu'à la capacité maximale ou jusqu'à ce que le client arrête
         print("Remplissage !")
         Choix_arret_modif = 1
         while (Reservoir_actuel < Reservoir_Max) and Choix_arret_modif == 1:
@@ -58,7 +58,7 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
                 print("État du réservoir d'essence : " + str(Reservoir_actuel) + " litres sur " + str(Reservoir_Max))
                 print("Coût (jusqu'à maintenant) : " + str(Prix_Total) + "$")
 
-    elif choix_remplissage == "M" or choix_remplissage == "m":
+    elif choix_remplissage == "M" or choix_remplissage == "m": # Remplissage du réservoir jusqu'à ce que le montant choisi du client soit atteint ou jusqu'à ce que le réservoir soit plein
         Montant = float(input("Quel montant voulez - vous mettre dans le réservoir ? "))
         print("Remplissage !")
         Reservoir_final= float(Montant/ prix_ordinaire+ Reservoir_actuel)
@@ -85,7 +85,7 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
         print("Erreur de saisie. Veuillez choisir entre P et M")
         Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionnel)
     print("Terminé!")
-    if validation_code_promo(code_promotionnel) == True :
+    if validation_code_promo(code_promotionnel) == True : # Vérification du code promotionnel et calcul du prix final
         print("---------------------------------------------------------")
         print("Le montant final est : "+str(Prix_Total*0.7)+"$")
         print("Faites bonne route !")
@@ -95,7 +95,7 @@ def Remplissage(Reservoir_actuel, Reservoir_Max, prix_ordinaire, code_promotionn
         print("Faites bonne route !")
         exit()
 
-def validation_code_promo(code_promotionnel):
+def validation_code_promo(code_promotionnel): # Vérification du code promotionnel
     print("---------------------------------------------------------")
     validation = input("Si vous connaissez le code promotionnel RABAIS+, entrez - le maintenant pour obtenir 30% de rabais : ")
     if validation == code_promotionnel:
@@ -114,12 +114,11 @@ def config_pompe():
     print("∗∗∗∗∗∗∗∗∗∗")
     return prix_ordinaire, prix_diesel, prix_super, code_promotionnel
 
-prix_ordinaire, prix_diesel, prix_super, code_promotionnel = config_pompe()
+prix_ordinaire, prix_diesel, prix_super, code_promotionnel = config_pompe() # On appelle la fonction config_pompe() et on récupère les valeurs de retour
 print("Une autombile arrive.")
-Reservoir_actuel, Reservoir_Max= Reservoir_status()
-pompe(prix_ordinaire, prix_diesel, prix_super)
+Reservoir_actuel, Reservoir_Max= Reservoir_status() # On appelle la fonction Reservoir_status() et on récupère les valeurs de retour
+pompe(prix_ordinaire, prix_diesel, prix_super) # On appelle la fonction pompe() et on lui passe les valeurs de retour de config_pompe()
 
-#explique moi pourquoi ça ne marche pas
 
 
 
